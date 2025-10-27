@@ -1,31 +1,73 @@
-# Waze
-The goal of this project is to `build a machine learning model to predict which user is most likely to churn` and therefore `finding ways to make them stay`. 
-now for those who aren't familiar withe the word `churn`, it means that (how much is a user likely to refrain or leave from using a service).
+# 🚗 **Waze Churn Prediction Project**
 
-### Jupyter notebook is recommended.
+> *"Turning data into insight — predicting which users are most likely to hit the brakes and churn!"*
 
-Please note that (Go through one by one)
+---
 
-1. `The Preliminary analysis and the details regarding it are in the root files.`
+### 🎯 **Project Overview**
 
-2. `EDA`
+The goal of this project is to **build a Machine Learning model** that can  
+💡 **predict which users are most likely to churn**,  
+and more importantly, **find actionable insights to keep them engaged**.
 
-3. `Data Exploraion and Hypothesis Testing`
+> 🧩 For those unfamiliar with the term **churn** — it refers to how likely a user is to **stop using a service** or **leave the platform**.
 
-4. `Regrssion Analysis`
+---
 
-5. `Building a Machine Learning Model`
+### 🧠 **Environment Recommendation**
 
-Used packages 
-- pandas, numpy,  matplotlib.pyplot
-- datetime, seaborn, stats from scipy
--  from sklearn, StandardScaler, OneHotEncoder
--  train_test_split,  classification_report,  metrics eg. accuracy_score recall_score, f1_score,
--  confusion_matrix,
--  LogisticRegression,
--  GridSearchCV,
--  RandomForestClassifier,
--  XGBClassifier,
--  from xgboost plot_import importance etc.
+> ⚙️ This project is best explored in **Jupyter Notebook**  
+*(for better visualization, step-by-step analysis, and clean inline plots!)*
 
+---
 
+### 🧾 **Project Structure**
+
+Please go through the files **step-by-step** 👇
+
+1. 📁 **Preliminary Analysis**  
+   - Contains initial exploration, dataset overview, and structure inspection.
+
+2. 🔍 **EDA (Exploratory Data Analysis)**  
+   - Visual insights, correlation maps, missing data handling, and outlier detection.
+
+3. 🧪 **Data Exploration & Hypothesis Testing**  
+   - Testing assumptions, statistical tests (t-test, chi-square, ANOVA), and validation.
+
+4. 📉 **Regression Analysis**  
+   - Building baseline models and analyzing relationships between predictors.
+
+5. 🤖 **Machine Learning Model Building**  
+   - Training and tuning models to predict churn with high accuracy.
+
+---
+
+### 🧰 **Tech Stack & Libraries**
+
+> These are the key tools and libraries that powered the project ⚙️
+
+#### 🧮 **Core Libraries**
+- `pandas`, `numpy`, `matplotlib.pyplot`
+- `seaborn`, `datetime`, `scipy.stats`
+
+#### 🧠 **Machine Learning (sklearn)**
+- `StandardScaler`, `OneHotEncoder`  
+- `train_test_split`, `classification_report`  
+- `metrics` — `accuracy_score`, `recall_score`, `f1_score`, `confusion_matrix`  
+- `LogisticRegression`, `GridSearchCV`, `RandomForestClassifier`
+
+#### 🚀 **Boosting**
+- `XGBClassifier`  
+- From `xgboost`: `plot_importance`, `plot_tree`
+
+---
+
+### 🧩 **In Short**
+This project dives deep into **data cleaning**, **feature engineering**, and **model building**,  
+transforming raw user data into actionable intelligence — helping Waze retain its users, one prediction at a time 💥
+
+---
+
+> 🧠 *Crafted by:* **Swapnanil Bala**  
+> 🎓 *Data Scientist in the making | Exploring Machine Learning and Real-World Data Challenges*  
+> ✨ *“Code. Learn. Evolve.”*
