@@ -1,73 +1,65 @@
-# 🚗 **Waze Churn Prediction Project**
+# Waze User Churn Prediction
 
-> *"Turning data into insight — predicting which users are most likely to hit the brakes and churn!"*
+Predicting which Waze users will stop using the app, so retention efforts can reach them first. This is
+a project from the **Google Advanced Data Analytics Professional Certificate**, built on its synthetic
+Waze dataset (14,999 users, 17.7% churned).
 
----
+## Result
 
-### 🎯 **Project Overview**
+**The data doesn't carry enough signal to predict churn well, and the honest answer is to say so.**
 
-The goal of this project is to **build a Machine Learning model** that can  
-💡 **predict which users are most likely to churn**,  
-and more importantly, **find actionable insights to keep them engaged**.
+| Model | Split | Recall (churned) | Precision | F1 | Accuracy |
+|---|---|---:|---:|---:|---:|
+| Logistic regression | Test | 0.09 | 0.52 | 0.16 | 0.82 |
+| Random forest | Validation | 0.12 | 0.45 | 0.19 | 0.82 |
+| XGBoost | Validation | 0.17 | 0.43 | 0.24 | 0.81 |
+| **XGBoost (champion)** | **Test** | **0.17** | **0.39** | **0.23** | **0.81** |
+| XGBoost, threshold 0.124 | Test | **0.50** | 0.30 | 0.38 | 0.71 |
 
-> 🧩 For those unfamiliar with the term **churn** — it refers to how likely a user is to **stop using a service** or **leave the platform**.
+Always predicting "retained" already scores 82% accuracy, so accuracy says almost nothing here.
+Recall on churned users is the metric that matters, and at the default threshold the champion catches
+only 1 churner in 6.
 
----
+<p align="center"><img src="docs/precision-recall-curve.png" alt="Precision-recall curve for the XGBoost model, average precision 0.33" width="480"></p>
 
-### 🧠 **Environment Recommendation**
+**The trade-off that makes it usable:** a false positive only costs a user an extra reminder email, so
+precision can be sacrificed. Lowering the decision threshold to 0.124 catches **half of all churners**
+at 30% precision. That's good enough to guide a low-risk retention campaign, not to drive
+consequential decisions.
 
-> ⚙️ This project is best explored in **Jupyter Notebook**  
-*(for better visualization, step-by-step analysis, and clean inline plots!)*
+**What the models leaned on:** six of XGBoost's ten most important features were ones I engineered,
+such as `km_per_driving_day` and `percent_sessions_in_last_month`. The earlier logistic regression
+leaned almost entirely on one feature, `activity_days`.
 
----
+## The workflow
 
-### 🧾 **Project Structure**
+Each stage has a notebook and an executive summary, following Google's PACE framework
+(Plan, Analyze, Construct, Execute):
 
-Please go through the files **step-by-step** 👇
+| # | Stage | Notebook | Summary |
+|---|---|---|---|
+| 1 | Data inspection | [Notebook](Waze/Waze%20project%20lab.ipynb) | [PDF](Waze/Preliminary%20Waze%20executive%20summary.pdf) |
+| 2 | Exploratory data analysis | [Notebook](Waze/EDA/Exploratory%20Data%20Analysis%20Waze%20project%20lab.ipynb) | [PPTX](Waze/EDA/Waze_Executive%20_Summary.pptx) |
+| 3 | Hypothesis testing | [Notebook](Waze/Data%20Exploration%20and%20Hypothesis%20Testing/Data_Exploration_and_Hypothesis_Testing_Waze%20project%20lab.ipynb) | [PPTX](Waze/Data%20Exploration%20and%20Hypothesis%20Testing/Waze_Executive_Summary.pptx) |
+| 4 | Logistic regression | [Notebook](Waze/Regression%20Analysis/Regression%20analysis%20Waze%20project%20lab.ipynb) | [PPTX](Waze/Regression%20Analysis/Waze_Executive_Summary_Regression.pptx) |
+| 5 | **Tree-based models** | [Notebook](Waze/Building%20a%20Machine%20Learning%20Model/Building%20a%20machine%20learning%20model.ipynb) | [PPTX](Waze/Building%20a%20Machine%20Learning%20Model/Building%20a%20machine%20learning%20model.pptx) |
 
-1. 📁 **Preliminary Analysis**  
-   - Contains initial exploration, dataset overview, and structure inspection.
+The project plan is in the [PACE strategy document](Waze/PACE%20strategy%20document.pdf).
 
-2. 🔍 **EDA (Exploratory Data Analysis)**  
-   - Visual insights, correlation maps, missing data handling, and outlier detection.
+**Modelling setup:**
+- Split: 60 / 20 / 20 into train, validation and test.
+- Tuning: `GridSearchCV` with `refit='recall'`.
+- The champion was picked on validation and scored once on test.
 
-3. 🧪 **Data Exploration & Hypothesis Testing**  
-   - Testing assumptions, statistical tests (t-test, chi-square, ANOVA), and validation.
+## Run it
 
-4. 📉 **Regression Analysis**  
-   - Building baseline models and analyzing relationships between predictors.
+```bash
+pip install pandas numpy scikit-learn xgboost matplotlib seaborn scipy jupyter
+jupyter notebook
+```
 
-5. 🤖 **Machine Learning Model Building**  
-   - Training and tuning models to predict churn with high accuracy.
+The dataset comes from the certificate program and isn't redistributed here.
 
----
+## Stack
 
-### 🧰 **Tech Stack & Libraries**
-
-> These are the key tools and libraries that powered the project ⚙️
-
-#### 🧮 **Core Libraries**
-- `pandas`, `numpy`, `matplotlib.pyplot`
-- `seaborn`, `datetime`, `scipy.stats`
-
-#### 🧠 **Machine Learning (sklearn)**
-- `StandardScaler`, `OneHotEncoder`  
-- `train_test_split`, `classification_report`  
-- `metrics` — `accuracy_score`, `recall_score`, `f1_score`, `confusion_matrix`  
-- `LogisticRegression`, `GridSearchCV`, `RandomForestClassifier`
-
-#### 🚀 **Boosting**
-- `XGBClassifier`  
-- From `xgboost`: `plot_importance`, `plot_tree`
-
----
-
-### 🧩 **In Short**
-This project dives deep into **data cleaning**, **feature engineering**, and **model building**,  
-transforming raw user data into actionable intelligence — helping Waze retain its users, one prediction at a time 💥
-
----
-
-> 🧠 *Crafted by:* **Swapnanil Bala**  
-> 🎓 *Data Scientist in the making | Exploring Machine Learning and Real-World Data Challenges*  
-> ✨ *“Code. Learn. Evolve.”*
+Python · pandas · scikit-learn · XGBoost · SciPy · matplotlib / seaborn
